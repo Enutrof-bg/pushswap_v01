@@ -31,17 +31,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (lst == NULL)
 		return (NULL);
-	content_temp = f(lst->content);
-	newlist = ft_lstnew(content_temp);
-	if (newlist == NULL)
-	{
-		if (del)
-			del(content_temp);
-		return (NULL);
-	}
-	first = newlist;
-	newlist = newlist->next;
-	lst = lst->next;
+	first = NULL;
 	while (lst != NULL)
 	{
 		content_temp = f(lst->content);
@@ -54,7 +44,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 			return (NULL);
 		}
 		ft_lstadd_back(&first, newlist);
-		// newlist = newlist->next;
 		lst = lst->next;
 	}
 	return (first);

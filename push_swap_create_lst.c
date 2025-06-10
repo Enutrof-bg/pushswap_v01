@@ -15,7 +15,7 @@
 int	ft_check(int argc, char **argv, t_list **lst)
 {
 	int		i;
-	int test;
+	int		test;
 	t_list	*temp;
 
 	i = 1;
@@ -37,8 +37,8 @@ int	ft_check(int argc, char **argv, t_list **lst)
 
 int	ft_check_arg2(int argc, char **argv, t_list **lst)
 {
-	int i;
-	int test;
+	int		i;
+	int		test;
 	t_list	*temp;
 
 	i = 0;
@@ -60,7 +60,7 @@ int	ft_check_arg2(int argc, char **argv, t_list **lst)
 
 void	ft_stack_arg2(char **argv, t_list **stacka)
 {
-	int toto;
+	int	toto;
 
 	toto = 0;
 	argv = ft_split(argv[1], ' ');

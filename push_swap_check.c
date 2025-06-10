@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-int ft_int_check(char *argv)
+int	ft_int_check(char *argv)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (argv[0] == '-')
@@ -31,8 +31,8 @@ int ft_int_check(char *argv)
 
 int	ft_dup_check(char *argv, t_list *lst)
 {
-	int i;
-	int test;
+	int	i;
+	int	test;
 
 	i = 0;
 	test = ft_atoi(argv);
@@ -45,11 +45,26 @@ int	ft_dup_check(char *argv, t_list *lst)
 	return (1);
 }
 
+int	ft_limit_check2(int signe, int result, int i, char *argv)
+{
+	if (signe == 1)
+	{
+		if (result > (2147483647 - (argv[i] - '0')) / 10)
+			return (0);
+	}
+	else if (signe == -1)
+	{
+		if ((result * signe < ((-2147483648) + (argv[i] - '0')) / 10))
+			return (0);
+	}
+	return (1);
+}
+
 int	ft_limit_check(char *argv)
 {
-	int result;
-	int i;
-	int signe;
+	int	result;
+	int	i;
+	int	signe;
 
 	signe = 1;
 	i = 0;
@@ -62,16 +77,8 @@ int	ft_limit_check(char *argv)
 	}
 	while (argv[i] >= '0' && argv[i] <= '9')
 	{
-		if (signe == 1)
-		{
-			if (result > (2147483647 - (argv[i] - '0')) / 10)
-				return (0);
-		}
-		else if (signe == -1)
-		{
-			if ((result * signe < ((-2147483648) + (argv[i] - '0')) / 10))
-				return (0);
-		}
+		if (ft_limit_check2(signe, result, i, argv) == 0)
+			return (0);
 		result = result * 10 + argv[i] - '0';
 		i++;
 	}

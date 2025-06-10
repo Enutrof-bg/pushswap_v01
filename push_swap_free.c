@@ -12,9 +12,10 @@
 
 #include "push_swap.h"
 
-void ft_clear(t_list **lst)
+void	ft_clear(t_list **lst)
 {
-	t_list *del;
+	t_list	*del;
+
 	while (*lst != NULL)
 	{
 		del = *lst;
@@ -24,9 +25,11 @@ void ft_clear(t_list **lst)
 	*lst = NULL;
 }
 
-void ft_clear_double_tab(char **argv)
+void	ft_clear_double_tab(char **argv)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (argv[i])
 	{
 		free(argv[i]);
