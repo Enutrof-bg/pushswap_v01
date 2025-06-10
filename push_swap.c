@@ -12,162 +12,40 @@
 
 #include "push_swap.h"
 
-int ft_int_check(char *argv)
+t_list	*ft_lstnew_test(int content)
 {
-	int i;
+	t_list	*newlist;
 
-	i = 0;
-	if (argv[0] == '-')
-		i++;
-	while (argv[i])
-	{
-		if (argv[i] >= '0' && argv[i] <= '9')
-			i++;
-		else
-			return (0);
-	}
-	return (1);
+	newlist = malloc(sizeof(t_list));
+	if (newlist == NULL)
+		return (NULL);
+	newlist->content = content;
+	newlist->next = NULL;
+	return (newlist);
 }
 
-int	ft_dup_check(char *argv, int *tab, int index)
+void	ft_lstprint(t_list *lst)
 {
-	int i;
+	t_list	*temp;
 
-	i = 0;
-	while (i < index)
+	temp = lst;
+	while (temp != NULL)
 	{
-		if (tab[i] == ft_atoi(argv))
-			return (0);
-		i++;
+		ft_printf("%d\n", temp->content);
+		temp = temp->next;
 	}
-	return (1);
 }
-
-int	ft_limit_check(char *argv)
-{
-	int result;
-	int i;
-	int signe;
-
-	signe = 1;
-	i = 0;
-	result = 0;
-	if (argv[i] == '+' || argv[i] == '-')
-	{
-		if (argv[i] == '-')
-			signe = signe * -1;
-		i++;
-	}
-	while (argv[i] >= '0' && argv[i] <= '9')
-	{
-		if (signe == 1)
-		{
-			if (result > (2147483647 - (argv[i] - '0')) / 10)
-				return (0);
-		}
-		else if (signe == -1)
-		{
-			if ((result * signe < ((-2147483648) + (argv[i] - '0')) / 10))
-				return (0);
-		}
-		result = result * 10 + argv[i] - '0';
-		i++;
-	}
-	return (1);
-}
-
-int	ft_check(int argc, char **argv, int *tabint)
-{
-	int i;
-
-	i = 1;
-	while (i < argc)
-	{
-		if (ft_int_check(argv[i]) == 0)
-			return (0);
-		if (ft_dup_check(argv[i], tabint, i - 1) == 0)
-			return (0);
-		if (ft_limit_check(argv[i]) == 0)
-			return (0);
-		tabint[i - 1] = ft_atoi(argv[i]);
-		i++;
-	}
-	return (1);
-}
-
-int	ft_check_arg2(int argc, char **argv, int *tabint)
-{
-	int i;
-
-	i = 0;
-	while (i < argc)
-	{
-		if (ft_int_check(argv[i]) == 0)
-			return (0);
-		if (ft_dup_check(argv[i], tabint, i) == 0)
-			return (0);
-		if (ft_limit_check(argv[i]) == 0)
-			return (0);
-		tabint[i] = ft_atoi(argv[i]);
-		i++;
-	}
-	return (1);
-}
-
 
 int	main(int argc, char **argv)
 {
-	int *tabint;
-	int toto = 0;
+	t_list	*stacka;
+
+	stacka = NULL;
 	if (argc == 2)
-	{
-		argv = ft_split(argv[1], ' ');
-		while (argv[toto])
-			toto++;
-		tabint = malloc(sizeof(int) * (toto));
-		//TODO ERREUR MALLOC
-		if (ft_check_arg2(toto, argv, tabint) == 0)
-		{
-			free(tabint);
-			ft_printf("Error\n");
-			return (0);
-		}
-		int chinois = 0;
-		while (chinois < toto)
-		{
-			ft_printf("%d\n", tabint[chinois]);
-			chinois++;
-		}
-		int i = 0;
-		while (argv[i])
-		{
-			free(argv[i]);
-			i++;
-		}
-		free(argv);
-		free(tabint);
-	}
+		ft_stack_arg2(argv, &stacka);
 	else if (argc > 2)
-	{
-		tabint = malloc(sizeof(int) * (argc - 1));
-		// if (!tabint) 
-		//TODO erreur malloc
-		if (ft_check(argc, argv, tabint) == 0)
-		{
-			free(tabint);
-			ft_printf("Error\n");
-			return (0);
-		}
-		//pour afficher int *tabint
-		int chinois = 0;
-		while (chinois < argc - 1)
-		{
-			ft_printf("%d\n", tabint[chinois]);
-			chinois++;
-		}
-
-		free(tabint);
-	}	
-
-	return 0;
+		ft_stack_arg_more(argv, &stacka, argc);
+	ft_lstprint(stacka);
+	ft_clear(&stacka);
+	return (0);
 }

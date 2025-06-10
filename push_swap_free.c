@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   push_swap_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kevwang <kevwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/05 10:20:34 by kevwang           #+#    #+#             */
-/*   Updated: 2025/06/05 10:20:35 by kevwang          ###   ########.fr       */
+/*   Created: 2025/06/10 18:05:57 by kevwang           #+#    #+#             */
+/*   Updated: 2025/06/10 18:05:59 by kevwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+void ft_clear(t_list **lst)
 {
-	int	i;
-	int	signe;
-	int	result;
+	t_list *del;
+	while (*lst != NULL)
+	{
+		del = *lst;
+		*lst = (*lst)->next;
+		free(del);
+	}
+	*lst = NULL;
+}
 
-	i = 0;
-	signe = 1;
-	result = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+void ft_clear_double_tab(char **argv)
+{
+	int i = 0;
+	while (argv[i])
 	{
-		if (str[i] == '-')
-			signe = signe * -1;
+		free(argv[i]);
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + str[i] - '0';
-		i++;
-	}
-	return (result * signe);
+	free(argv);
 }

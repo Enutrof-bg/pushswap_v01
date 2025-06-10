@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-size_t	ft_count_word(char *str, char c)
+static size_t	ft_count_word(char *str, char c)
 {
 	size_t	i;
 	size_t	count;
@@ -35,7 +35,7 @@ size_t	ft_count_word(char *str, char c)
 	return (count);
 }
 
-char	*ft_add(char *str, char *src, char c)
+static char	*ft_add(char *str, char *src, char c)
 {
 	size_t	i;
 
@@ -49,7 +49,23 @@ char	*ft_add(char *str, char *src, char c)
 	return (str);
 }
 
-char	**ft_word_split(char *str, char c, char **new_tab, size_t index)
+static char	**ft_string_malloc(char **new_tab, size_t j, size_t index)
+{
+	new_tab[index] = malloc(sizeof(char) * (j + 1));
+	if (!new_tab[index])
+	{
+		while (index > 0)
+		{
+			index--;
+			free(new_tab[index]);
+		}
+		free(new_tab);
+		return (NULL);
+	}
+	return (new_tab);
+}
+
+static char	**ft_word_split(char *str, char c, char **new_tab, size_t index)
 {
 	size_t	i;
 	size_t	j;
@@ -64,16 +80,9 @@ char	**ft_word_split(char *str, char c, char **new_tab, size_t index)
 		{
 			if (str[i + j] == c || str[i + j] == '\0')
 			{
-				new_tab[index] = malloc(sizeof(char) * (j + 1));
-				if (!new_tab[index])
-				{
-					while (index >= 0)
-					{
-						free(new_tab[index]);
-						index--;
-					}
+				new_tab = ft_string_malloc(new_tab, j, index);
+				if (new_tab == NULL)
 					return (NULL);
-				}
 				new_tab[index] = ft_add(new_tab[index], &str[i], c);
 				index++;
 				i = i + j;
@@ -100,14 +109,10 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	new_tab = ft_word_split((char *)s, c, new_tab, index);
 	if (!new_tab)
-	{
-		free(new_tab);
 		return (NULL);
-	}
 	new_tab[len] = 0;
 	return (new_tab);
 }
-
 /*
 int main()
 {
