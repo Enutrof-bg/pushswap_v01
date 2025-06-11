@@ -19,10 +19,16 @@ push_swap_utils.c \
 push_swap_check.c \
 push_swap_free.c \
 push_swap_create_lst.c \
-ft_printf/ft_printf.c ft_printf/ft_putcharstr.c ft_printf/ft_puthexa.c ft_printf/ft_putnbr.c ft_printf/ft_putptr.c ft_printf/ft_putunsigned.c\
 ft_split.c \
 ft_lstadd_back_bonus.c \
 ft_lstadd_front_bonus.c \
+push_swap_sort_swap.c \
+push_swap_sort_rotate.c \
+push_swap_sort_reverse.c \
+push_swap_sort_push.c \
+push_swap_lstnew.c \
+push_swap_print.c \
+push_swap_sort_1.c \
 # ft_lstnew_bonus.c \
 # ft_lstclear_bonus.c \
 # ft_lstdelone_bonus.c \
@@ -31,6 +37,13 @@ ft_lstadd_front_bonus.c \
 # ft_lstmap_bonus.c \
 # ft_lstsize_bonus.c 
 
+# DIRPRINTF = ft_printf
+# SRCPRINTF = ${DIRPRINTF}/ft_printf.c \
+# ${DIRPRINTF}/ft_putcharstr.c \
+# ${DIRPRINTF}/ft_puthexa.c \
+# ${DIRPRINTF}/ft_putnbr.c \
+# ${DIRPRINTF}/ft_putptr.c \
+# ${DIRPRINTF}/ft_putunsigned.c\
 
 OBJ = ${SRC:.c=.o}
 
@@ -39,7 +52,8 @@ NAME = pushswap
 all : ${NAME}
 
 ${NAME} : ${OBJ}
-	${CC} ${CFLAGS} $^ -o $@ 
+	make -C ft_printf
+	${CC} ${CFLAGS} $^ -o $@ -Lft_printf -lftprintf
 
 %.o:%.c
 	${CC} ${CFLAGS} -c $^ -o $@
@@ -49,7 +63,6 @@ clean:
 	push_swap_check.o \
 	push_swap_free.o \
 	push_swap_create_lst.o \
-	ft_printf/ft_printf.o ft_printf/ft_putcharstr.o ft_printf/ft_puthexa.o ft_printf/ft_putnbr.o ft_printf/ft_putptr.o ft_printf/ft_putunsigned.o \
 	ft_split.o \
 	ft_lstadd_back_bonus.o \
 	ft_lstadd_front_bonus.o \
@@ -59,7 +72,15 @@ clean:
 	ft_lstlast_bonus.o \
 	ft_lstmap_bonus.o  \
 	ft_lstnew.o \
-	ft_lstsize_bonus.o 
+	ft_lstsize_bonus.o \
+	push_swap_sort_swap.o \
+	push_swap_sort_rotate.o \
+	push_swap_sort_reverse.o \
+	push_swap_sort_push.o \
+	push_swap_lstnew.o \
+	push_swap_print.o \
+	push_swap_sort_1.o
+	make fclean -C ft_printf
 
 fclean : clean
 	rm -f pushswap
