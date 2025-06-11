@@ -38,11 +38,49 @@ void	ft_sort_3value(t_list **lstA)
 		ft_reverse_rotate_a(lstA);
 }
 
+int	ft_get_smallest(t_list *lstA)
+{
+	long	small;
+
+	small = LONG_MAX;
+	while ((lstA))
+	{
+		if (small > (lstA)->content)
+		{
+			small = (lstA)->content;
+		}
+		(lstA) = (lstA)->next;
+	}
+	return (small);
+}
+
+void	ft_get_target(t_list *lstA, t_list *lstB)
+{
+	long	target;
+	t_list	*temp;
+
+	target = LONG_MAX;
+	temp = lstA;
+	while ((lstA))
+	{
+		if ((lstB)->content < (lstA)->content
+			&& (lstA)->content < target)
+			target = (lstA)->content;
+		(lstA) = (lstA)->next;
+	}
+	lstA = temp;
+	if (target == LONG_MAX)
+		ft_printf("target:%d\n", ft_get_smallest(lstA));
+	else
+		ft_printf("target:%d\n", target);
+}
+
 void	ft_sort_5value(t_list **lstA, t_list **lstB, int nbr_value)
 {
 	while (nbr_value-- > 3)
 		ft_push_b(lstA, lstB);
 	ft_sort_3value(lstA);
+	ft_get_target(*lstA, *lstB);
 }
 
 void	ft_sort_1(t_list **lstA, t_list **lstB, int nbr_value)
