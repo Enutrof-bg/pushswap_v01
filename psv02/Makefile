@@ -47,7 +47,7 @@ push_swap_sort_1.c \
 
 OBJ = ${SRC:.c=.o}
 
-NAME = pushswap
+NAME = push_swap
 
 all : ${NAME}
 
