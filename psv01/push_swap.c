@@ -39,8 +39,10 @@ void	ft_lstprint(t_list *lst)
 int	main(int argc, char **argv)
 {
 	t_list	*stacka;
+	t_list  *stackb;
 
 	stacka = NULL;
+	stackb = NULL;
 	if (argc == 2)
 		ft_stack_arg2(argv, &stacka);
 	else if (argc > 2)
