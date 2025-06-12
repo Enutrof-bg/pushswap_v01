@@ -17,7 +17,7 @@ int	ft_int_check(char *argv)
 	int	i;
 
 	i = 0;
-	if (argv[0] == '-')
+	if (argv[0] == '-' || argv[0] == '+')
 		i++;
 	while (argv[i])
 	{

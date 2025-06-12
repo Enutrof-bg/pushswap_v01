@@ -17,7 +17,6 @@ int	main(int argc, char **argv)
 	t_list	*stacka;
 	t_list	*stackb;
 	int		nbr_value;
-
 	stacka = NULL;
 	stackb = NULL;
 	// t_list	*stack2;
@@ -51,6 +50,7 @@ int	main(int argc, char **argv)
 		// ft_push_a(&stacka, &stackb);
 		ft_sort_1(&stacka, &stackb, nbr_value);
 		ft_lstprint_2(stacka, stackb);
+		ft_if_sorted(stacka, stackb);
 	}
 	ft_clear(&stacka);
 	ft_clear(&stackb);

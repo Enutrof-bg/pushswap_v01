@@ -305,8 +305,24 @@ void ft_sort_back(t_list **lstA, t_list **lstB, int nbr_value)
 		{
 			target = ft_get_target(*lstA, *lstB);
 			// ft_printf("target:%d\n", target);
-			ft_sort_5value_a(lstA, target, ft_target_pos(*lstA, target), nbr_value);
+			// ft_sort_5value_a(lstA, target, ft_target_pos(*lstA, target), nbr_value);
 			// ft_push_b(lstA, lstB);
+			if (ft_find_high(*lstA, target, nbr_value) == 0)
+			{
+				while ((*lstA)->content != target)
+				{
+					
+					ft_reverse_rotate_a(lstA);
+				}
+			}
+			if (ft_find_high(*lstA, target, nbr_value) == 1)
+			{
+				while ((*lstA)->content != target)
+				{
+					ft_rotate_a(lstA);
+					
+				}
+			}
 		}
 		else if (/*(*lstA)->content < small || */(*lstB)->content > high)
 		{
@@ -334,16 +350,16 @@ void ft_sort_back(t_list **lstA, t_list **lstB, int nbr_value)
 			{
 				while ((*lstA)->content != small)
 				{
-					ft_reverse_rotate_b(lstB);
-					// ft_rotate_a(lstA);
+					// ft_reverse_rotate_a(lstA);
+					ft_rotate_a(lstA);
 				}
 			}
 			if (ft_find_high(*lstA, small, nbr_value) == 1)
 			{
 				while ((*lstA)->content != small)
 				{
-					ft_rotate_b(lstB);
-					// ft_reverse_rotate_a(lstA);
+					// ft_rotate_a(lstA);
+					ft_reverse_rotate_a(lstA);
 				}
 			}
 			// ft_push_b(lstA, lstB);
@@ -362,7 +378,8 @@ void ft_sort_test(t_list **lstA, t_list **lstB, int nbr_value)
 	int high;
 	int target;
 
-	ft_push_b(lstA, lstB);
+	if (nbr_value > 4)
+		ft_push_b(lstA, lstB);
 	ft_push_b(lstA, lstB);
 	// ft_lstprint_2(*lstA, *lstB);
 	// while ((*lstA))
@@ -375,8 +392,24 @@ void ft_sort_test(t_list **lstA, t_list **lstB, int nbr_value)
 		{
 			target = ft_get_target_2(*lstB, *lstA);
 			// ft_printf("target:%d\n", target);
-			ft_sort_5value_b(lstB, target, ft_target_pos(*lstB, target), nbr_value);
+			// ft_sort_5value_b(lstB, target, ft_target_pos(*lstB, target), nbr_value);
 			// ft_push_b(lstA, lstB);
+			if (ft_find_high(*lstB, target, nbr_value) == 0)
+			{
+				while ((*lstB)->content != target)
+				{
+					// ft_rotate_b(lstB);
+					ft_reverse_rotate_b(lstB);
+				}
+			}
+			if (ft_find_high(*lstB, target, nbr_value) == 1)
+			{
+				while ((*lstB)->content != target)
+				{
+					ft_rotate_b(lstB);
+					// ft_reverse_rotate_b(lstB);
+				}
+			}
 		}
 		// ft_printf("small:%d high:%d\n", small, high);
 		else if (/*(*lstA)->content < small || */(*lstA)->content > high)
@@ -385,16 +418,18 @@ void ft_sort_test(t_list **lstA, t_list **lstB, int nbr_value)
 			{
 				while ((*lstB)->content != high)
 				{
-					ft_rotate_b(lstB);
-					// ft_reverse_rotate_b(lstB);
+					// ft_printf("test1\n");
+					// ft_rotate_b(lstB);
+					ft_reverse_rotate_b(lstB);
 				}
 			}
 			if (ft_find_high(*lstB, high, nbr_value) == 1)
 			{
 				while ((*lstB)->content != high)
 				{
-					// ft_rotate_b(lstB);
-					ft_reverse_rotate_b(lstB);
+					// ft_printf("test2\n");
+					ft_rotate_b(lstB);
+					// ft_reverse_rotate_b(lstB);
 				}
 			}
 			// ft_push_b(lstA, lstB);
@@ -405,6 +440,7 @@ void ft_sort_test(t_list **lstA, t_list **lstB, int nbr_value)
 			{
 				while ((*lstB)->content != high)
 				{
+					// ft_printf("test3\n");
 					ft_reverse_rotate_b(lstB);
 					// ft_rotate_b(lstB);
 				}
@@ -413,6 +449,7 @@ void ft_sort_test(t_list **lstA, t_list **lstB, int nbr_value)
 			{
 				while ((*lstB)->content != high)
 				{
+					// ft_printf("test4\n");
 					ft_rotate_b(lstB);
 					// ft_reverse_rotate_b(lstB);
 				}

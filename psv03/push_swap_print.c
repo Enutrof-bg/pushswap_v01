@@ -67,3 +67,32 @@ void	ft_lstprint_2(t_list *lst, t_list *lst2)
 	}
 	ft_printf("_ _\na b\n\n");
 }
+
+void ft_if_sorted(t_list *lst, t_list *lst2)
+{
+	int temp;
+	int check;
+
+	check = 1;
+	temp = (lst)->content;
+	(lst) = (lst)->next;
+	while ((lst))
+	{
+		if ((lst)->content > temp)
+		{
+			temp = (lst)->content;
+			(lst) = (lst)->next;
+		}
+		else
+		{
+			check = 0;
+			break ;
+		}
+	}
+	if (lst2)
+		check = 0;
+	if (check == 1)
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
+}

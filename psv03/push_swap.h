@@ -55,6 +55,7 @@ t_list	*ft_lstnew_test(int content);
 void	ft_lstprint(t_list *lst);
 void	ft_lstprint_reverse(t_list *lst);
 void	ft_lstprint_2(t_list *lst, t_list *lst2);
+void	ft_if_sorted(t_list *lst, t_list *lst2);
 
 //push_swap_sort_1.c
 void	ft_sort_1(t_list **lstA, t_list **lstB, int nbr_value);
