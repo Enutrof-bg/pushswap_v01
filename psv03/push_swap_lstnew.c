@@ -23,3 +23,43 @@ t_list	*ft_lstnew_test(int content)
 	newlist->next = NULL;
 	return (newlist);
 }
+
+void	ft_lstclear_test(t_list **lst)
+{
+	t_list	*test;
+
+	while (*lst != NULL)
+	{
+		test = *lst;
+		*lst = (*lst)->next;
+		free(test);
+	}
+	*lst = NULL;
+}
+
+t_list	*ft_lstmap_test(t_list *lst)
+{
+	t_list	*newlist;
+	t_list	*first;
+	t_list	*temp;
+	int		content_temp;
+
+	if (lst == NULL)
+		return (NULL);
+	first = NULL;
+	temp = lst;
+	while (lst != NULL)
+	{
+		content_temp = (lst)->content;
+		newlist = ft_lstnew_test(content_temp);
+		if (newlist == NULL)
+		{
+			ft_lstclear_test(&first);
+			return (NULL);
+		}
+		ft_lstadd_back(&first, newlist);
+		lst = lst->next;
+	}
+	lst = temp;
+	return (first);
+}

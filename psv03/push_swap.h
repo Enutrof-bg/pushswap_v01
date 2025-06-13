@@ -21,6 +21,9 @@
 typedef struct s_list
 {
 	int				content;
+	int				soluce;
+	int				target;
+	long			steps;
 	struct s_list	*prev;
 	struct s_list	*next;
 }t_list;
@@ -50,6 +53,8 @@ void	ft_clear_double_tab(char **argv);
 
 //push_swap_lstnew.c
 t_list	*ft_lstnew_test(int content);
+void	ft_lstclear_test(t_list **lst);
+t_list	*ft_lstmap_test(t_list *lst);
 
 //push_swap_print.c
 void	ft_lstprint(t_list *lst);
