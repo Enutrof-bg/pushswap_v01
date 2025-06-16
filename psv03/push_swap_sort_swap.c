@@ -63,3 +63,52 @@ void	ft_swap_ss(t_list **lst, t_list **lst2)
 	}
 	write(1, "ss\n", 3);
 }
+
+void	ft_swap_a_test(t_list **lst)
+{
+	int	temp;
+	int	temp_next;
+
+	if (*lst && (*lst)->next)
+	{
+		temp = (*lst)->content;
+		temp_next = (*lst)->next->content;
+		(*lst)->next->content = temp;
+		(*lst)->content = temp_next;
+	}
+}
+
+void	ft_swap_b_test(t_list **lst)
+{
+	int	temp;
+	int	temp_next;
+
+	if (*lst && (*lst)->next)
+	{
+		temp = (*lst)->content;
+		temp_next = (*lst)->next->content;
+		(*lst)->next->content = temp;
+		(*lst)->content = temp_next;
+	}
+}
+
+void	ft_swap_ss_test(t_list **lst, t_list **lst2)
+{
+	int	temp;
+	int	temp_next;
+
+	if (*lst && (*lst)->next)
+	{
+		temp = (*lst)->content;
+		temp_next = (*lst)->next->content;
+		(*lst)->next->content = temp;
+		(*lst)->content = temp_next;
+	}
+	if (*lst2 && (*lst2)->next)
+	{
+		temp = (*lst2)->content;
+		temp_next = (*lst2)->next->content;
+		(*lst2)->next->content = temp;
+		(*lst2)->content = temp_next;
+	}
+}

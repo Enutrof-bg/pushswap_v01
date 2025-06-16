@@ -19,6 +19,7 @@ void ft_print_steps(t_list **lst)
 
 	pos = 1;
 	temp = (*lst);
+	ft_printf("ft_printf_steps\n");
 	while ((*lst))
 	{
 		printf("pos:%d value:%d steps:%ld soluce:%d target:%d\n", pos++, (*lst)->content, (*lst)->steps, (*lst)->soluce, (*lst)->target);
@@ -127,8 +128,9 @@ int	ft_get_target(t_list *lstA, t_list *lstB)
 }
 
 //trouve la plus grande
-int	ft_get_target_2(t_list *lstA, t_list *lstB)
+int	ft_get_target_2(t_list *lstA, t_list *lstB, int cible)
 {
+	(void)lstB;
 	long	target;
 	t_list	*temp;
 
@@ -136,7 +138,8 @@ int	ft_get_target_2(t_list *lstA, t_list *lstB)
 	temp = lstA;
 	while ((lstA))
 	{
-		if ((lstB)->content > (lstA)->content
+		// printf("cacatarget:%ld lstb:%d lsta:%d\n", target, cible, lstA->content);
+		if (cible > (lstA)->content
 			&& (lstA)->content > target)
 			target = (lstA)->content;
 		(lstA) = (lstA)->next;
@@ -323,7 +326,7 @@ void ft_sort_back(t_list **lstA, t_list **lstB, int nbr_value)
 	while ((*lstB))
 	{
 		//
-		ft_lstprint_2(*lstA, *lstB);
+		// ft_lstprint_2(*lstA, *lstB);
 		small = ft_get_smallest(*lstA);
 		high = ft_get_highest(*lstA);
 		// ft_printf("target:%d small:%d high:%d\n", target, small, high);
@@ -414,7 +417,7 @@ void ft_sort_test(t_list **lstA, t_list **lstB, int nbr_value)
 		ft_push_b(lstA, lstB);
 	ft_push_b(lstA, lstB);
 	//
-	ft_lstprint_2(*lstA, *lstB);
+	// ft_lstprint_2(*lstA, *lstB);
 	// while ((*lstA))
 	while (ft_list_size(*lstA) > 3)
 	{
@@ -423,7 +426,7 @@ void ft_sort_test(t_list **lstA, t_list **lstB, int nbr_value)
 		// ft_printf("small:%d high:%d\n", small, high);
 		if ((*lstA)->content > small && (*lstA)->content < high)
 		{
-			target = ft_get_target_2(*lstB, *lstA);
+			target = ft_get_target_2(*lstB, *lstA, (*lstA)->content);
 			// ft_printf("target:%d\n", target);
 			// ft_sort_5value_b(lstB, target, ft_target_pos(*lstB, target), nbr_value);
 			// ft_push_b(lstA, lstB);
@@ -491,7 +494,7 @@ void ft_sort_test(t_list **lstA, t_list **lstB, int nbr_value)
 		}
 		ft_push_b(lstA, lstB);
 		//
-		ft_lstprint_2(*lstA, *lstB);
+		// ft_lstprint_2(*lstA, *lstB);
 	}
 	ft_sort_3value(lstA);
 	ft_sort_back(lstA, lstB, nbr_value);
@@ -507,15 +510,170 @@ int ft_target(t_list *lstA, t_list *lstB, int cible)
 	high = ft_get_highest(lstB);
 	if (cible > small && cible < high)
 	{
-		ft_printf("test:1 ");
-		return (ft_get_target_2(lstB, lstA));
+		// ft_printf("test:1 ");
+		return (ft_get_target_2(lstB, lstA, cible));
 	}
 	else
 	{
-		ft_printf("test:2 ");
+		// ft_printf("test:2 ");
 		return (high);
 	}
 }
+
+long ft_test_check_r_test(t_list *lstA, t_list *lstB, int cible, int target)
+{
+	(void)lstA;
+	(void)lstB;
+	(void)cible;
+	(void)target;
+	long steps_temp;
+	long tempA;
+	long tempB;
+
+	steps_temp = 0;
+	tempA = lstA->content;
+	tempB = lstB->content;
+	// ft_printf("test_check_rotate\n");
+	// target = ft_target(lstA, lstB, cible);
+	// ft_printf("target:%d\n", target);
+	while (lstA->content != cible && lstB->content != target)
+	{
+		ft_rotate_rr_test(&lstA, &lstB);
+		steps_temp++;
+	}
+	while (lstA->content == cible && lstB->content != target)
+	{
+		// ft_printf("test_check_rotate\n");
+		// ft_lstprint_2(lstA, lstB);
+		// target = ft_target(lstA, lstB, cible);
+		// ft_printf("cible:%d target:%d\n", cible, target);
+		ft_rotate_b_test(&lstB);
+		steps_temp++;
+	}
+	while (lstA->content != cible && lstB->content == target)
+	{
+		ft_rotate_a_test(&lstA);
+		steps_temp++;
+	}
+	while (lstA->content != tempA)
+		ft_rotate_a_test(&lstA);
+	while (lstB->content != tempB)
+		ft_rotate_b_test(&lstB);
+	return (steps_temp);
+}
+
+long ft_test_check_reverse_r_test(t_list *lstA, t_list *lstB, int cible, int target)
+{
+	(void)lstA;
+	(void)lstB;
+	(void)cible;
+	(void)target;
+	long steps_temp;
+	long tempA;
+	long tempB;
+
+	steps_temp = 0;
+	tempA = lstA->content;
+	tempB = lstB->content;
+	// ft_printf("test_check_reverse_rotate\n");
+	while (lstA->content != cible && lstB->content != target)
+	{
+		ft_reverse_rotate_rrr_test(&lstA, &lstB);
+		steps_temp++;
+	}
+	while (lstA->content == cible && lstB->content != target)
+	{
+		// ft_printf("test_check_reverse_rotate\n");
+		ft_reverse_rotate_b_test(&lstB);
+		steps_temp++;
+	}
+	while (lstA->content != cible && lstB->content == target)
+	{
+		ft_reverse_rotate_a_test(&lstA);
+		steps_temp++;
+	}
+	while (lstA->content != tempA)
+		ft_rotate_a_test(&lstA);
+	while (lstB->content != tempB)
+		ft_rotate_b_test(&lstB);
+	return (steps_temp);
+}
+
+long ft_test_check_inverse_r_test(t_list *lstA, t_list *lstB, int cible, int target)
+{
+	(void)lstA;
+	(void)lstB;
+	(void)cible;
+	(void)target;
+	long steps_temp;
+	long tempA;
+	long tempB;
+
+	steps_temp = 0;
+	tempA = lstA->content;
+	tempB = lstB->content;
+	// ft_printf("test_check_inverse_rotate\n");
+	while (lstA->content != cible && lstB->content != target)
+	{
+		ft_rotate_a_test(&lstA);
+		ft_reverse_rotate_b_test(&lstB);
+		steps_temp++;
+		steps_temp++;
+	}
+	while (lstA->content == cible && lstB->content != target)
+	{
+		// ft_printf("test_check_inverse_rotate\n");
+		ft_reverse_rotate_b_test(&lstB);
+		steps_temp++;
+	}
+	while (lstA->content != cible && lstB->content == target)
+	{
+		ft_rotate_a_test(&lstA);
+		steps_temp++;
+	}
+	while (lstA->content != tempA)
+		ft_rotate_a_test(&lstA);
+	while (lstB->content != tempB)
+		ft_rotate_b_test(&lstB);
+	return (steps_temp);
+}
+
+long ft_test_check_inverse_reverse_r_test(t_list *lstA, t_list *lstB, int cible, int target)
+{
+	long steps_temp;
+
+	steps_temp = 0;
+	long tempA;
+	long tempB;
+
+	tempA = lstA->content;
+	tempB = lstB->content;
+	// ft_printf("test_check_inverse_reverse_rotate\n");
+	while (lstA->content != cible && lstB->content != target)
+	{
+		ft_rotate_b_test(&lstB);
+		ft_reverse_rotate_a_test(&lstA);
+		steps_temp++;
+		steps_temp++;
+	}
+	while (lstA->content == cible && lstB->content != target)
+	{
+		// ft_printf("test_check_inverse_reverse_rotate\n");
+		ft_rotate_b_test(&lstB);
+		steps_temp++;
+	}
+	while (lstA->content != cible && lstB->content == target)
+	{
+		ft_reverse_rotate_a_test(&lstA);
+		steps_temp++;
+	}
+	while (lstA->content != tempA)
+		ft_rotate_a_test(&lstA);
+	while (lstB->content != tempB)
+		ft_rotate_b_test(&lstB);
+	return (steps_temp);
+}
+
 
 long ft_test_check_r(t_list *lstA, t_list *lstB, int cible, int target)
 {
@@ -526,7 +684,9 @@ long ft_test_check_r(t_list *lstA, t_list *lstB, int cible, int target)
 	long steps_temp;
 
 	steps_temp = 0;
-	ft_printf("test_check_rotate\n");
+	// ft_printf("test_check_rotate\n");
+	// target = ft_target(lstA, lstB, cible);
+	// ft_printf("target:%d\n", target);
 	while (lstA->content != cible && lstB->content != target)
 	{
 		ft_rotate_rr(&lstA, &lstB);
@@ -534,6 +694,10 @@ long ft_test_check_r(t_list *lstA, t_list *lstB, int cible, int target)
 	}
 	while (lstA->content == cible && lstB->content != target)
 	{
+		// ft_printf("test_check_rotate\n");
+		// ft_lstprint_2(lstA, lstB);
+		// target = ft_target(lstA, lstB, cible);
+		// ft_printf("cible:%d target:%d\n", cible, target);
 		ft_rotate_b(&lstB);
 		steps_temp++;
 	}
@@ -554,7 +718,7 @@ long ft_test_check_reverse_r(t_list *lstA, t_list *lstB, int cible, int target)
 	long steps_temp;
 
 	steps_temp = 0;
-	ft_printf("test_check_reverse_rotate\n");
+	// ft_printf("test_check_reverse_rotate\n");
 	while (lstA->content != cible && lstB->content != target)
 	{
 		ft_reverse_rotate_rrr(&lstA, &lstB);
@@ -562,6 +726,7 @@ long ft_test_check_reverse_r(t_list *lstA, t_list *lstB, int cible, int target)
 	}
 	while (lstA->content == cible && lstB->content != target)
 	{
+		// ft_printf("test_check_reverse_rotate\n");
 		ft_reverse_rotate_b(&lstB);
 		steps_temp++;
 	}
@@ -582,7 +747,7 @@ long ft_test_check_inverse_r(t_list *lstA, t_list *lstB, int cible, int target)
 	long steps_temp;
 
 	steps_temp = 0;
-	ft_printf("test_check_inverse_rotate\n");
+	// ft_printf("test_check_inverse_rotate\n");
 	while (lstA->content != cible && lstB->content != target)
 	{
 		ft_rotate_a(&lstA);
@@ -592,6 +757,7 @@ long ft_test_check_inverse_r(t_list *lstA, t_list *lstB, int cible, int target)
 	}
 	while (lstA->content == cible && lstB->content != target)
 	{
+		// ft_printf("test_check_inverse_rotate\n");
 		ft_reverse_rotate_b(&lstB);
 		steps_temp++;
 	}
@@ -608,7 +774,7 @@ long ft_test_check_inverse_reverse_r(t_list *lstA, t_list *lstB, int cible, int 
 	long steps_temp;
 
 	steps_temp = 0;
-	ft_printf("test_check_inverse_reverse_rotate\n");
+	// ft_printf("test_check_inverse_reverse_rotate\n");
 	while (lstA->content != cible && lstB->content != target)
 	{
 		ft_rotate_b(&lstB);
@@ -618,6 +784,7 @@ long ft_test_check_inverse_reverse_r(t_list *lstA, t_list *lstB, int cible, int 
 	}
 	while (lstA->content == cible && lstB->content != target)
 	{
+		// ft_printf("test_check_inverse_reverse_rotate\n");
 		ft_rotate_b(&lstB);
 		steps_temp++;
 	}
@@ -642,7 +809,7 @@ void ft_copy_list(t_list **tempA, t_list **tempB, t_list *lstA, t_list *lstB)
 void ft_set_soluce(t_list **lst, int cible, int soluce, int target)
 {
 	t_list *temp;
-
+	(void)target;
 	temp = *lst;
 	while (*lst)
 	{
@@ -671,53 +838,53 @@ long ft_how_many_steps(t_list **lstA, t_list **lstB, int cible, int target)
 	// tempB = ft_lstmap_test(lstB);
 	ft_copy_list(&tempA, &tempB, *lstA, *lstB);
 	// ft_lstprint_2(lstA, lstB);
-	ft_lstprint_2(tempA, tempB);
-	steps_temp = ft_test_check_r(tempA, tempB, cible, target);
+	// ft_lstprint_2(tempA, tempB);
+	steps_temp = ft_test_check_r_test(tempA, tempB, cible, target);
 	if (steps_temp < steps)
 	{
 		steps = steps_temp;
 		ft_set_soluce(lstA, cible, 100, target);
 	}
-	ft_printf("MIN_STEPS:%d\n", steps);
+	// ft_printf("MIN_STEPS:%d\n", steps);
 	// ft_clear(&tempA);
 	// ft_clear(&tempB);
 	// tempA = ft_lstmap_test(lstA);
 	// tempB = ft_lstmap_test(lstB);
-	ft_copy_list(&tempA, &tempB, *lstA, *lstB);
+	// ft_copy_list(&tempA, &tempB, *lstA, *lstB);
 	// ft_lstprint_2(lstA, lstB);
-	ft_lstprint_2(tempA, tempB);
-	steps_temp = ft_test_check_reverse_r(tempA, tempB, cible, target);
+	// ft_lstprint_2(tempA, tempB);
+	steps_temp = ft_test_check_reverse_r_test(tempA, tempB, cible, target);
 	if (steps_temp < steps)
 	{
 		steps = steps_temp;
 		ft_set_soluce(lstA, cible, 200, target);
 	}
-	ft_printf("MIN_STEPS:%d\n", steps);
+	// ft_printf("MIN_STEPS:%d\n", steps);
 
-	ft_copy_list(&tempA, &tempB, *lstA, *lstB);
+	// ft_copy_list(&tempA, &tempB, *lstA, *lstB);
 	// ft_lstprint_2(lstA, lstB);
-	ft_lstprint_2(tempA, tempB);
-	steps_temp = ft_test_check_inverse_r(tempA, tempB, cible, target);
+	// ft_lstprint_2(tempA, tempB);
+	steps_temp = ft_test_check_inverse_r_test(tempA, tempB, cible, target);
 	if (steps_temp < steps)
 	{
 		steps = steps_temp;
 		ft_set_soluce(lstA, cible, 300, target);
 	}
-	ft_printf("MIN_STEPS:%d\n", steps);
+	// ft_printf("MIN_STEPS:%d\n", steps);
 
 
-	ft_copy_list(&tempA, &tempB, *lstA, *lstB);
+	// ft_copy_list(&tempA, &tempB, *lstA, *lstB);
 	// ft_lstprint_2(lstA, lstB);
-	ft_lstprint_2(tempA, tempB);
-	steps_temp = ft_test_check_inverse_reverse_r(tempA, tempB, cible, target);
+	// ft_lstprint_2(tempA, tempB);
+	steps_temp = ft_test_check_inverse_reverse_r_test(tempA, tempB, cible, target);
 	if (steps_temp < steps)
 	{
 		steps = steps_temp;
 		ft_set_soluce(lstA, cible, 400, target);
 	}
-	ft_printf("MIN_STEPS:%d\n", steps);
+	// ft_printf("MIN_STEPS:%d\n", steps);
 
-	ft_lstprint_2(tempA, tempB);
+	// ft_lstprint_2(tempA, tempB);
 	ft_clear(&tempA);
 	ft_clear(&tempB);
 
@@ -741,54 +908,54 @@ long ft_sauvage(t_list *lstA, t_list *lstB, int cible, int target)
 	// tempB = ft_lstmap_test(lstB);
 	ft_copy_list(&tempA, &tempB, lstA, lstB);
 	// ft_lstprint_2(lstA, lstB);
-	ft_lstprint_2(tempA, tempB);
+	// ft_lstprint_2(tempA, tempB);
 	steps_temp = ft_test_check_r(tempA, tempB, cible, target);
 	if (steps_temp < steps)
 	{
 		steps = steps_temp;
 		lstA->soluce = 1;
 	}
-	ft_printf("MIN_STEPS:%d\n", steps);
+	// ft_printf("MIN_STEPS:%d\n", steps);
 	// ft_clear(&tempA);
 	// ft_clear(&tempB);
 	// tempA = ft_lstmap_test(lstA);
 	// tempB = ft_lstmap_test(lstB);
 	ft_copy_list(&tempA, &tempB, lstA, lstB);
 	// ft_lstprint_2(lstA, lstB);
-	ft_lstprint_2(tempA, tempB);
+	// ft_lstprint_2(tempA, tempB);
 	steps_temp = ft_test_check_reverse_r(tempA, tempB, cible, target);
 	if (steps_temp < steps)
 	{
 		steps = steps_temp;
 		lstA->soluce = 999;
 	}
-	ft_printf("MIN_STEPS:%d\n", steps);
+	// ft_printf("MIN_STEPS:%d\n", steps);
 
 	ft_copy_list(&tempA, &tempB, lstA, lstB);
 	// ft_lstprint_2(lstA, lstB);
-	ft_lstprint_2(tempA, tempB);
+	// ft_lstprint_2(tempA, tempB);
 	steps_temp = ft_test_check_inverse_r(tempA, tempB, cible, target);
 	if (steps_temp < steps)
 	{
 		steps = steps_temp;
 		lstA->soluce = 3;
 	}
-	ft_printf("MIN_STEPS:%d\n", steps);
+	// ft_printf("MIN_STEPS:%d\n", steps);
 
 
 	ft_copy_list(&tempA, &tempB, lstA, lstB);
 	// ft_lstprint_2(lstA, lstB);
-	ft_lstprint_2(tempA, tempB);
+	// ft_lstprint_2(tempA, tempB);
 	steps_temp = ft_test_check_inverse_reverse_r(tempA, tempB, cible, target);
 	if (steps_temp < steps)
 	{
 		steps = steps_temp;
 		lstA->soluce = 4;
 	}
-	ft_printf("MIN_STEPS:%d\n", steps);
+	// ft_printf("MIN_STEPS:%d\n", steps);
 
 
-	ft_lstprint_2(lstA, lstB);
+	// ft_lstprint_2(lstA, lstB);
 
 	return (steps);
 }
@@ -798,64 +965,84 @@ long ft_calculate_steps_node(t_list **lstA, t_list **lstB, int cible)
 	(void)lstA;
 	(void)lstB;
 	long steps;
-	// int target;
+	int target;
 	
 	steps = LONG_MAX;
 	// steps = 9999999;
-	(*lstA)->target = ft_target(*lstA, *lstB, cible);
-	printf("cible:%d target:%d\n", cible, (*lstA)->target);
-	steps = ft_how_many_steps(lstA, lstB, cible, (*lstA)->target);
+	target = ft_target(*lstA, *lstB, cible);
+	// printf("cible:%d target:%d\n", cible, target);
+	steps = ft_how_many_steps(lstA, lstB, cible, target);
+	return (steps);
+}
+
+long ft_calculate_steps_node_2(t_list **lstA, t_list **lstB, int cible)
+{
+	(void)lstA;
+	(void)lstB;
+	long steps;
+	int target;
+	
+	steps = LONG_MAX;
+	// steps = 9999999;
+	target = ft_target(*lstA, *lstB, cible);
+	// printf("cible:%d target:%d\n", cible, target);
+	// steps = ft_how_many_steps(lstA, lstB, cible, target);
 	return (steps);
 }
 
 int ft_min_step(t_list *lst)
 {
-	int value;
 	t_list *temp;
+	t_list *value;
 
 	temp = lst;
-	value = lst->content;
-	while (lst->next)
+	value = lst;
+	while (lst)
 	{
-		ft_printf("c:%d s:%d cn:%d sn:%d\n", lst->content, lst->steps, lst->next->content, lst->next->steps);
-		if (lst->steps > lst->next->steps)
+		// ft_printf("c:%d s:%d cn:%d sn:%d\n", lst->content, lst->steps, lst->next->content, lst->next->steps);
+		if (lst->next && value->steps > lst->next->steps)
 		{
-			value = lst->next->content;
+			// ft_printf("c:%d s:%d cn:%d sn:%d\n", lst->content, lst->steps, lst->next->content, lst->next->steps);
+			value = lst->next;
 		}
 		lst = lst->next;
 	}
+	// ft_printf("c:%d s:%d cn:%d sn:%d\n", lst->content, lst->steps, lst->next->content, lst->next->steps);
 	lst = temp;
-	return (value);
+	return (value->content);
 }
+/*
+int ft_find_soluce(t_list **lst, t_list **lstB, int cible)
+{
+	t_list *temp;
+	// int soluce;
+	(void)cible;
+	int soluce;
 
-// int ft_find_soluce(t_list **lst, t_list **lstB, int cible)
-// {
-// 	t_list *temp;
-// 	// int soluce;
-// 	(void)cible;
-// 	int soluce;
+	soluce = -1;
+	temp = *lst;
+	while (*lst)
+	{
+		if ((*lst)->content == cible)
+		{
+			soluce = ft_sauvage(temp, *lstB, cible, ft_target(temp, *lstB, cible));
+		}
+		// ft_printf("content:%d soluce:%d\n", lst->content, lst->soluce);
 
-// 	soluce = -1;
-// 	temp = *lst;
-// 	while (*lst)
-// 	{
-// 		if ((*lst)->content == cible)
-// 		{
-// 			soluce = ft_sauvage(temp, *lstB, cible, ft_target(temp, *lstB, cible));
-// 		}
-// 		// ft_printf("content:%d soluce:%d\n", lst->content, lst->soluce);
-
-// 		*lst = (*lst)->next;
-// 	}
-// 	*lst = temp;
-// 	return (soluce);
-// }
-
+		*lst = (*lst)->next;
+	}
+	*lst = temp;
+	return (soluce);
+}
+*/
 void ft_execute_soluce(t_list **lstA, t_list **lstB, int value)
 {
 	t_list *temp;
+	int target;
 
 	temp = (*lstA);
+	target = ft_target(temp, *lstB, value);
+	// printf("target:%d\n", target);
 	while (*lstA)
 	{
 		if ((*lstA)->content == value)
@@ -868,6 +1055,34 @@ void ft_execute_soluce(t_list **lstA, t_list **lstB, int value)
 				ft_test_check_inverse_r(temp, *lstB, value, ft_target(temp, *lstB, value));
 			if ((*lstA)->soluce == 400)
 				ft_test_check_inverse_reverse_r(temp, *lstB, value, ft_target(temp, *lstB, value));
+			break ;
+		}
+		(*lstA) = (*lstA)->next;
+	}
+	(*lstA) = temp;
+}
+
+void ft_execute_soluce_back(t_list **lstA, t_list **lstB, int value)
+{
+	t_list *temp;
+	int target;
+
+	temp = (*lstA);
+	target = ft_get_target(*lstB, temp);
+	// printf("target:%d\n", target);
+	while (*lstA)
+	{
+		if ((*lstA)->content == value)
+		{
+			if ((*lstA)->soluce == 100)
+				ft_test_check_r(temp, *lstB, value, target);
+			if ((*lstA)->soluce == 200)
+				ft_test_check_reverse_r(temp, *lstB, value, target);
+			if ((*lstA)->soluce == 300)
+				ft_test_check_inverse_r(temp, *lstB, value, target);
+			if ((*lstA)->soluce == 400)
+				ft_test_check_inverse_reverse_r(temp, *lstB, value, target);
+			break ;
 		}	
 		(*lstA) = (*lstA)->next;
 	}
@@ -884,6 +1099,8 @@ void ft_calculate_steps_lst(t_list **lstA, t_list **lstB)
 
 	value = 0;
 	soluce = 999;
+	while (ft_list_size(*lstA) > 3)
+	{
 	// temp = ft_lstmap_test(*lstA);
 		temp = (*lstA);
 		while ((*lstA))
@@ -892,37 +1109,61 @@ void ft_calculate_steps_lst(t_list **lstA, t_list **lstB)
 			(*lstA) = (*lstA)->next;
 		}
 		(*lstA) = temp;
-		ft_print_steps(lstA);
-		ft_lstprint_2(*lstA, *lstB);
+		// ft_print_steps(lstA);
+		// ft_lstprint_2(*lstA, *lstB);
 		value = ft_min_step((*lstA));
 		// ft_lstprint_2(*lstA, *lstB);
 		// soluce = ft_find_soluce((lstA), lstB, value);
 		// ft_printf("value:%d soluce:%d\n", value, soluce);
-		ft_printf("value:%d\n", value);
+		// ft_printf("value:%d\n", value);
 		// ft_clear(&temp);
-		ft_lstprint_2(*lstA, *lstB);
+		// ft_lstprint_2(*lstA, *lstB);
 		ft_execute_soluce(lstA, lstB, value);
 		ft_push_b(lstA, lstB);
+	}
+	ft_sort_3value(lstA);
+	int test = ft_get_target(*lstA, *lstB);
+	// ft_printf("toto:%d\n", test);
+	// temp = (*lstA);
+	t_list *tempA;
+	t_list *tempB;
+	tempA = NULL;
+	tempB = NULL;
+	while (*lstB)
+	{
+		ft_copy_list(&tempA, &tempB, *lstA, *lstB);
 
-
-		// temp = (*lstA);
-		// while ((*lstA))
-		// {
-		// 	(*lstA)->steps = ft_calculate_steps_node(&temp, (lstB), (*lstA)->content);
-		// 	(*lstA) = (*lstA)->next;
-		// }
-		// (*lstA) = temp;
-		// ft_print_steps(lstA);
-		// ft_lstprint_2(*lstA, *lstB);
-		// value = ft_min_step((*lstA));
-		// // ft_lstprint_2(*lstA, *lstB);
-		// // soluce = ft_find_soluce((lstA), lstB, value);
-		// // ft_printf("value:%d soluce:%d\n", value, soluce);
-		// ft_printf("value:%d\n", value);
-		// // ft_clear(&temp);
-		// ft_lstprint_2(*lstA, *lstB);
-		// ft_execute_soluce(lstA, lstB, value);
-		// ft_push_b(lstA, lstB);
+		long steps = LONG_MAX;
+		long temp_steps;
+		// ft_printf("steps:%d\n", steps);
+		temp_steps = ft_test_check_r_test(tempB, tempA, (*lstB)->content, test);
+		// ft_printf("temp_steps:%d\n", temp_steps);
+		if (temp_steps < steps)
+		{
+			steps = temp_steps;
+			ft_set_soluce(lstB, (*lstB)->content, 100, test);
+		}
+		ft_copy_list(&tempA, &tempB, *lstA, *lstB);
+		// ft_printf("steps:%d\n", steps);
+		temp_steps = ft_test_check_reverse_r_test(tempB, tempA, (*lstB)->content, test);
+		// ft_printf("temp_steps:%d\n", temp_steps);
+		if (temp_steps < steps)
+		{
+			steps = temp_steps;
+			ft_set_soluce(lstB, (*lstB)->content, 200, test);
+		}
+		// ft_printf("steps:%d\n", steps);
+		// ft_printf("stepslstb:%d\n", (*lstB)->soluce);
+		ft_clear(&tempA);
+		ft_clear(&tempB);
+		ft_execute_soluce_back(lstB, lstA, (*lstB)->content);
+		ft_push_b(lstB, lstA);
+	}
+	int small = ft_get_smallest(*lstA);
+	while ((*lstA)->content != small)
+	{
+		ft_rotate_a(lstA);
+	}
 }
 
 void ft_sort_jsp(t_list **lstA, t_list **lstB, int nbr_value)
@@ -934,12 +1175,13 @@ void ft_sort_jsp(t_list **lstA, t_list **lstB, int nbr_value)
 	if (nbr_value > 4)
 		ft_push_b(lstA, lstB);
 	ft_push_b(lstA, lstB);
-	ft_push_b(lstA, lstB);
-	ft_push_b(lstA, lstB);
-	ft_push_b(lstA, lstB);
-	ft_push_b(lstA, lstB);
-	ft_push_b(lstA, lstB);
+	// ft_push_b(lstA, lstB);
+	// ft_push_b(lstA, lstB);
+	// ft_push_b(lstA, lstB);
+	// ft_push_b(lstA, lstB);
+	// ft_push_b(lstA, lstB);
 	ft_calculate_steps_lst(lstA, lstB);
+	// ft_calculate_steps_lst(lstA, lstB);
 }
 
 void	ft_sort_1(t_list **lstA, t_list **lstB, int nbr_value)

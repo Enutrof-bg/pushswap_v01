@@ -61,3 +61,51 @@ void	ft_push_b(t_list **lstA, t_list **lstB)
 	}
 	write(1, "pb\n", 3);
 }
+
+void	ft_push_a_test(t_list **lstA, t_list **lstB)
+{
+	t_list	*temp;
+
+	if (*lstB != NULL)
+	{
+		temp = (*lstB);
+		(*lstB) = (*lstB)->next;
+		if (!(*lstA))
+		{
+			*lstA = ft_lstnew_test(temp->content);
+			if (!(*lstA))
+				exit(EXIT_FAILURE);
+			free((*lstB)->prev);
+		}
+		else
+		{
+			(*lstA)->prev = temp;
+			(*lstA)->prev->next = (*lstA);
+			(*lstA) = (*lstA)->prev;
+		}
+	}
+}
+
+void	ft_push_b_test(t_list **lstA, t_list **lstB)
+{
+	t_list	*temp;
+
+	if (*lstA != NULL)
+	{
+		temp = (*lstA);
+		(*lstA) = (*lstA)->next;
+		if (!(*lstB))
+		{
+			*lstB = ft_lstnew_test(temp->content);
+			if (!(*lstB))
+				exit(EXIT_FAILURE);
+			free((*lstA)->prev);
+		}
+		else
+		{
+			(*lstB)->prev = temp;
+			(*lstB)->prev->next = (*lstB);
+			(*lstB) = (*lstB)->prev;
+		}
+	}
+}

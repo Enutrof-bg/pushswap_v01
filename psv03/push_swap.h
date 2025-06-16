@@ -60,7 +60,7 @@ t_list	*ft_lstmap_test(t_list *lst);
 void	ft_lstprint(t_list *lst);
 void	ft_lstprint_reverse(t_list *lst);
 void	ft_lstprint_2(t_list *lst, t_list *lst2);
-void	ft_if_sorted(t_list *lst, t_list *lst2);
+int	ft_if_sorted(t_list *lst, t_list *lst2);
 
 //push_swap_sort_1.c
 void	ft_sort_1(t_list **lstA, t_list **lstB, int nbr_value);
@@ -83,6 +83,18 @@ void	ft_rotate_rr(t_list **lst, t_list **lst2);
 void	ft_swap_a(t_list **lst);
 void	ft_swap_b(t_list **lst);
 void	ft_swap_ss(t_list **lst, t_list **lst2);
+
+void	ft_push_a_test(t_list **lstA, t_list **lstB);
+void	ft_push_b_test(t_list **lstA, t_list **lstB);
+void	ft_reverse_rotate_a_test(t_list **lst);
+void	ft_reverse_rotate_b_test(t_list **lst);
+void	ft_reverse_rotate_rrr_test(t_list **lst, t_list **lst2);
+void	ft_rotate_a_test(t_list **lst);
+void	ft_rotate_b_test(t_list **lst);
+void	ft_rotate_rr_test(t_list **lst, t_list **lst2);
+void	ft_swap_a_test(t_list **lst);
+void	ft_swap_b_test(t_list **lst);
+void	ft_swap_ss_test(t_list **lst, t_list **lst2);
 
 //truc
 t_list	*ft_lstnew(void *content);
