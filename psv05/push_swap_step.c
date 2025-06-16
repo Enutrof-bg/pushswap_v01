@@ -95,8 +95,8 @@ int	ft_third_check(t_list **lstA, int small)
 	}
 	ft_clear(&temp_a);
 	if (steps > temp_steps)
-		return (1);
-	return (2);
+		return (2);
+	return (1);
 }
 
 void	ft_third_step(t_list **lstA, int rotate, int small)

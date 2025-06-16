@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 		// 	write(1, "OK\n", 3);
 		// else
 		// 	write(1, "KO\n", 3);
+		ft_lstprint_2(stacka, stackb);
 		ft_clear(&stacka);
 		ft_clear(&stackb);
 	}

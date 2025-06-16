@@ -1157,7 +1157,7 @@ void ft_calculate_steps_lst(t_list **lstA, t_list **lstB)
 		ft_clear(&tempA);
 		ft_clear(&tempB);
 		ft_execute_soluce_back(lstB, lstA, (*lstB)->content);
-		ft_push_b(lstB, lstA);
+		ft_push_a(lstA, lstB);
 	}
 	int small = ft_get_smallest(*lstA);
 	ft_copy_list(&tempA, &tempB, *lstA, *lstB);

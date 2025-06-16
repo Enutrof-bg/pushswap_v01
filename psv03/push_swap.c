@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 			return (0);
 		}
 		ft_sort_1(&stacka, &stackb, nbr_value);
-		// ft_lstprint_2(stacka, stackb);
+		ft_lstprint_2(stacka, stackb);
 		// if (ft_if_sorted(stacka, stackb) == 1)
 		// 	write(1, "OK\n", 3);
 		// else
