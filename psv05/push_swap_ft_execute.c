@@ -25,6 +25,7 @@ long	ft_test_check_r(t_list *lstA,
 	}
 	while (lstA->content == cible && lstB->content != target)
 	{
+		// ft_printf("test0");
 		ft_rotate_b(&lstB);
 		steps_temp++;
 	}
@@ -49,6 +50,7 @@ long	ft_test_check_reverse_r(t_list *lstA,
 	}
 	while (lstA->content == cible && lstB->content != target)
 	{
+		// ft_printf("test1");
 		ft_reverse_rotate_b(&lstB);
 		steps_temp++;
 	}

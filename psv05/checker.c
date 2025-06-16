@@ -76,7 +76,6 @@ int	main(int argc, char **argv)
 {
 	t_list	*stacka;
 	t_list	*stackb;
-	int		nbr_value;
 	char	*str;
 
 	stacka = NULL;
@@ -85,11 +84,12 @@ int	main(int argc, char **argv)
 	{
 		str = ft_get_input();
 		if (argc == 2)
-			nbr_value = ft_stack_arg2(argv, &stacka);
+			ft_stack_arg2(argv, &stacka);
 		else if (argc > 2)
-			nbr_value = ft_stack_arg_more(argv, &stacka, argc);
+			ft_stack_arg_more(argv, &stacka, argc);
 		ft_execute(str, &stacka, &stackb);
 		free(str);
+		ft_lstprint_2(stacka, stackb);
 		if (ft_if_sorted(stacka, stackb) == 1)
 			write(1, "OK\n", 3);
 		else

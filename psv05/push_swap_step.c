@@ -29,6 +29,8 @@ void	ft_first_step(t_list **lstA, t_list **lstB)
 		(*lstA) = temp;
 		value = ft_min_step((*lstA));
 		ft_execute_soluce(lstA, lstB, value);
+		///////////
+		// ft_lstprint_2(*lstA, *lstB);
 		ft_push_b(lstA, lstB);
 	}
 	ft_sort_3value(lstA);
@@ -42,12 +44,12 @@ void	ft_second_step(t_list **lstA, t_list **lstB)
 	long	steps;
 	long	temp_steps;
 
-	steps = LONG_MAX;
-	test = ft_get_target(*lstA, *lstB);
 	temp_a = NULL;
 	temp_b = NULL;
 	while (*lstB)
 	{
+		steps = LONG_MAX;
+		test = ft_get_target(*lstA, *lstB);
 		ft_copy_list(&temp_a, &temp_b, *lstA, *lstB);
 		temp_steps = ft_test_check_r_test(temp_b,
 				temp_a, (*lstB)->content, test);
@@ -66,7 +68,9 @@ void	ft_second_step(t_list **lstA, t_list **lstB)
 		}
 		ft_clear(&temp_a);
 		ft_clear(&temp_b);
-		ft_execute_soluce_back(lstB, lstA, (*lstB)->content);
+		ft_execute_soluce_back(lstA, lstB, (*lstB)->content);
+		///////////
+		// ft_lstprint_2(*lstA, *lstB);
 		ft_push_a(lstA, lstB);
 	}
 }

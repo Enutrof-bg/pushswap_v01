@@ -31,10 +31,8 @@ int	ft_int_check(char *argv)
 
 int	ft_dup_check(char *argv, t_list *lst)
 {
-	int	i;
 	int	test;
 
-	i = 0;
 	test = ft_atoi(argv);
 	while (lst != NULL)
 	{
