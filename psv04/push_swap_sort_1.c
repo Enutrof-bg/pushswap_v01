@@ -1157,16 +1157,16 @@ void ft_calculate_steps_lst(t_list **lstA, t_list **lstB)
 		ft_clear(&tempA);
 		ft_clear(&tempB);
 		ft_execute_soluce_back(lstB, lstA, (*lstB)->content);
-		ft_push_b(lstB, lstA);
+		ft_push_a(lstA, lstB);
 	}
 	int small = ft_get_smallest(*lstA);
 	ft_copy_list(&tempA, &tempB, *lstA, *lstB);
 	long steps = LONG_MAX;
 	long temp_steps = 0;
 	int rotate = 0;
-	while ((*lstA)->content != small)
+	while ((tempA)->content != small)
 	{
-		ft_rotate_a_test(lstA);
+		ft_rotate_a_test(&tempA);
 		temp_steps++;
 	}
 	if (temp_steps < steps)
@@ -1174,10 +1174,10 @@ void ft_calculate_steps_lst(t_list **lstA, t_list **lstB)
 		steps = temp_steps;
 		rotate = 1;
 	}
-
-	while ((*lstA)->content != small)
+	ft_copy_list(&tempA, &tempB, *lstA, *lstB);
+	while ((tempA)->content != small)
 	{
-		ft_reverse_rotate_a_test(lstA);
+		ft_reverse_rotate_a_test(&tempA);
 		temp_steps++;
 	}
 	if (temp_steps < steps)
