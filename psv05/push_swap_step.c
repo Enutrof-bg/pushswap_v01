@@ -12,17 +12,6 @@
 
 #include "push_swap.h"
 
-long	ft_calculate_steps_node(t_list **lstA, t_list **lstB, int cible)
-{
-	long	steps;
-	int		target;
-
-	steps = LONG_MAX;
-	target = ft_target(*lstA, *lstB, cible);
-	steps = ft_how_many_steps(lstA, lstB, cible, target);
-	return (steps);
-}
-
 void	ft_first_step(t_list **lstA, t_list **lstB)
 {
 	t_list	*temp;
@@ -33,7 +22,8 @@ void	ft_first_step(t_list **lstA, t_list **lstB)
 		temp = (*lstA);
 		while ((*lstA))
 		{
-			(*lstA)->steps = ft_calculate_steps_node(&temp, (lstB), (*lstA)->content);
+			(*lstA)->steps = ft_calculate_steps_node(&temp,
+					(lstB), (*lstA)->content);
 			(*lstA) = (*lstA)->next;
 		}
 		(*lstA) = temp;
@@ -59,14 +49,16 @@ void	ft_second_step(t_list **lstA, t_list **lstB)
 	while (*lstB)
 	{
 		ft_copy_list(&temp_a, &temp_b, *lstA, *lstB);
-		temp_steps = ft_test_check_r_test(temp_b, temp_a, (*lstB)->content, test);
+		temp_steps = ft_test_check_r_test(temp_b,
+				temp_a, (*lstB)->content, test);
 		if (temp_steps < steps)
 		{
 			steps = temp_steps;
 			ft_set_soluce(lstB, (*lstB)->content, 100, test);
 		}
 		ft_copy_list(&temp_a, &temp_b, *lstA, *lstB);
-		temp_steps = ft_test_check_reverse_r_test(temp_b, temp_a, (*lstB)->content, test);
+		temp_steps = ft_test_check_reverse_r_test(temp_b,
+				temp_a, (*lstB)->content, test);
 		if (temp_steps < steps)
 		{
 			steps = temp_steps;

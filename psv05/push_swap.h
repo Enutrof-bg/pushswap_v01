@@ -53,16 +53,24 @@ void	ft_clear(t_list **lst);
 void	ft_clear_double_tab(char **argv);
 
 //push_swap_ft_check_test.c
-long	ft_test_check_r_test(t_list *lstA, t_list *lstB, int cible, int target);
-long	ft_test_check_reverse_r_test(t_list *lstA, t_list *lstB, int cible, int target);
-long	ft_test_check_inverse_r_test(t_list *lstA, t_list *lstB, int cible, int target);
-long	ft_test_check_inverse_reverse_r_test(t_list *lstA, t_list *lstB, int cible, int target);
+long	ft_test_check_r_test(t_list *lstA,
+			t_list *lstB, int cible, int target);
+long	ft_test_check_reverse_r_test(t_list *lstA,
+			t_list *lstB, int cible, int target);
+long	ft_test_check_inverse_r_test(t_list *lstA,
+			t_list *lstB, int cible, int target);
+long	ft_test_check_inverse_reverse_r_test(t_list *lstA,
+			t_list *lstB, int cible, int target);
 
 //push_swap_ft_execute.c
-long	ft_test_check_r(t_list *lstA, t_list *lstB, int cible, int target);
-long	ft_test_check_reverse_r(t_list *lstA, t_list *lstB, int cible, int target);
-long	ft_test_check_inverse_r(t_list *lstA, t_list *lstB, int cible, int target);
-long	ft_test_check_inverse_reverse_r(t_list *lstA, t_list *lstB, int cible, int target);
+long	ft_test_check_r(t_list *lstA,
+			t_list *lstB, int cible, int target);
+long	ft_test_check_reverse_r(t_list *lstA,
+			t_list *lstB, int cible, int target);
+long	ft_test_check_inverse_r(t_list *lstA,
+			t_list *lstB, int cible, int target);
+long	ft_test_check_inverse_reverse_r(t_list *lstA,
+			t_list *lstB, int cible, int target);
 
 //push_swap_ft_execute_soluce.c
 void	ft_execute_soluce(t_list **lstA, t_list **lstB, int value);
@@ -92,6 +100,7 @@ void	ft_sort_3value(t_list **lstA);
 
 //push_swap_sort_1.c
 void	ft_sort_1(t_list **lstA, t_list **lstB, int nbr_value);
+long	ft_calculate_steps_node(t_list **lstA, t_list **lstB, int cible);
 long	ft_how_many_steps(t_list **lstA, t_list **lstB, int cible, int target);
 
 //push_swap_sort_swap.c
@@ -139,7 +148,8 @@ void	ft_third_step(t_list **lstA, int rotate, int small);
 //push_swap_utlis_2.c 
 void	ft_reset_steps(t_list **lst);
 int		ft_list_size(t_list *lst);
-void	ft_copy_list(t_list **tempA, t_list **tempB, t_list *lstA, t_list *lstB);
+void	ft_copy_list(t_list **tempA,
+			t_list **tempB, t_list *lstA, t_list *lstB);
 void	ft_set_soluce(t_list **lst, int cible, int soluce, int target);
 int		ft_min_step(t_list *lst);
 

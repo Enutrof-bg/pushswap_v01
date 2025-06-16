@@ -24,13 +24,13 @@ void	ft_execute_soluce(t_list **lstA, t_list **lstB, int value)
 		if ((*lstA)->content == value)
 		{
 			if ((*lstA)->soluce == 100)
-				ft_test_check_r(temp, *lstB, value, ft_target(temp, *lstB, value));
+				ft_test_check_r(temp, *lstB, value, target);
 			if ((*lstA)->soluce == 200)
-				ft_test_check_reverse_r(temp, *lstB, value, ft_target(temp, *lstB, value));
+				ft_test_check_reverse_r(temp, *lstB, value, target);
 			if ((*lstA)->soluce == 300)
-				ft_test_check_inverse_r(temp, *lstB, value, ft_target(temp, *lstB, value));
+				ft_test_check_inverse_r(temp, *lstB, value, target);
 			if ((*lstA)->soluce == 400)
-				ft_test_check_inverse_reverse_r(temp, *lstB, value, ft_target(temp, *lstB, value));
+				ft_test_check_inverse_reverse_r(temp, *lstB, value, target);
 			break ;
 		}
 		(*lstA) = (*lstA)->next;
