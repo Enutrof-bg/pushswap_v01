@@ -1,52 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kevwang <kevwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 14:34:27 by kevwang           #+#    #+#             */
-/*   Updated: 2025/04/28 14:34:29 by kevwang          ###   ########.fr       */
+/*   Created: 2025/04/28 12:06:59 by kevwang           #+#    #+#             */
+/*   Updated: 2025/04/28 12:07:00 by kevwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list	*test;
-
-	while (*lst != NULL)
-	{
-		test = *lst;
-		*lst = (*lst)->next;
-		(*del)(test->content);
-		free(test);
-	}
-	*lst = NULL;
+	new->next = *lst;
+	*lst = new;
 }
 /*
-void	ft_del(void *s)
-{
-	// free(s);
-}
-
 int main()
-{
+{	
+	t_list *start = NULL;
+	// t_list *start = ft_lstnew("start");
 	t_list *node1 = ft_lstnew("node1");
 	t_list *node2 = ft_lstnew("node2");
 	t_list *node3 = ft_lstnew("node3");
-	t_list *node4 = ft_lstnew("node4");
 
-	node1->next = node2;
-	node2->next = node3;
-	node3->next = node4;
+	ft_lstadd_front(&start, node3);
+	ft_lstadd_front(&start, node2);
+	ft_lstadd_front(&start, node1);
 
-	ft_lstclear(&node2, &ft_del);
-	while(node1 != NULL)
+	// printf("%s\n", (char *)liste->content);
+	// printf("%s\n", (char *)node1->content);
+
+	// printf("%s\n", (char *)node1->next->content);
+	t_list *test = node1;
+
+	while (test != NULL)
 	{
-		printf("%s\n", (char *)node1->content);
-		node1 = node1->next;
+		printf("%s\n", (char *)test->content);
+		test = test->next;
 	}
+
+	// printf("%s\n", (char *)test->content);
+
 }
 */

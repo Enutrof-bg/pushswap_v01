@@ -86,8 +86,7 @@ int	ft_check_arg2(int argc, char **argv, t_list **lst)
 		ft_lstadd_back(lst, temp);
 		i++;
 	}
-	ft_lst_link_prev(lst);
-	return (1);
+	return (ft_lst_link_prev(lst), 1);
 }
 
 int	ft_stack_arg2(char **argv, t_list **stacka)

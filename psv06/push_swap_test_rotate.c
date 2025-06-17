@@ -1,0 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_test_rotate.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kevwang <kevwang@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/16 17:13:03 by kevwang           #+#    #+#             */
+/*   Updated: 2025/06/16 17:13:04 by kevwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+void	ft_rotate_a_test(t_list **lst)
+{
+	int		temp;
+	t_list	*first;
+
+	if (*lst)
+	{
+		temp = (*lst)->content;
+		first = (*lst);
+		while ((*lst)->next != NULL)
+		{
+			(*lst)->content = (*lst)->next->content;
+			(*lst) = (*lst)->next;
+		}
+		(*lst)->content = temp;
+		(*lst) = first;
+	}
+}
+
+void	ft_rotate_b_test(t_list **lst)
+{
+	int		temp;
+	t_list	*first;
+
+	if (*lst)
+	{
+		temp = (*lst)->content;
+		first = (*lst);
+		while ((*lst)->next != NULL)
+		{
+			(*lst)->content = (*lst)->next->content;
+			(*lst) = (*lst)->next;
+		}
+		(*lst)->content = temp;
+		(*lst) = first;
+	}
+}
+
+void	ft_rotate_rr2_test(t_list **lst2)
+{
+	int		temp;
+	t_list	*first;
+
+	if (*lst2)
+	{
+		temp = (*lst2)->content;
+		first = (*lst2);
+		while ((*lst2)->next != NULL)
+		{
+			(*lst2)->content = (*lst2)->next->content;
+			(*lst2) = (*lst2)->next;
+		}
+		(*lst2)->content = temp;
+		(*lst2) = first;
+	}
+}
+
+void	ft_rotate_rr_test(t_list **lst, t_list **lst2)
+{
+	int		temp;
+	t_list	*first;
+
+	if (*lst)
+	{
+		temp = (*lst)->content;
+		first = (*lst);
+		while ((*lst)->next != NULL)
+		{
+			(*lst)->content = (*lst)->next->content;
+			(*lst) = (*lst)->next;
+		}
+		(*lst)->content = temp;
+		(*lst) = first;
+	}
+	ft_rotate_rr2_test(lst2);
+}

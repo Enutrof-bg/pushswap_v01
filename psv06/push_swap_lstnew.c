@@ -19,7 +19,6 @@ t_list	*ft_lstnew_test(int content)
 	newlist = malloc(sizeof(t_list));
 	if (!newlist)
 	{
-		// exit(EXIT_FAILURE);
 		return (NULL);
 	}
 	newlist->content = content;
