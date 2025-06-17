@@ -45,7 +45,6 @@ void	ft_execute_soluce_back(t_list **lstA, t_list **lstB, int value)
 
 	temp = (*lstA);
 	target = ft_get_target(*lstA, *lstB);
-	// ft_printf("target:%d\n", target);
 	while (*lstB)
 	{
 		if ((*lstB)->content == value)

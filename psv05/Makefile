@@ -38,7 +38,8 @@ push_swap_ft_execute_soluce.c \
 push_swap_step.c \
 push_swap_test_reverse.c \
 push_swap_test_rotate.c \
-push_swap_test_swap.c
+push_swap_test_swap.c \
+push_swap_how_many.c
 # ft_lstnew_bonus.c \
 # ft_lstclear_bonus.c \
 # ft_lstdelone_bonus.c \
@@ -73,7 +74,8 @@ push_swap_ft_execute_soluce.c \
 push_swap_step.c \
 push_swap_test_reverse.c \
 push_swap_test_rotate.c \
-push_swap_test_swap.c
+push_swap_test_swap.c \
+push_swap_how_many.c
 # DIRPRINTF = ft_printf
 # SRCPRINTF = ${DIRPRINTF}/ft_printf.c \
 # ${DIRPRINTF}/ft_putcharstr.c \
@@ -138,7 +140,8 @@ clean:
 	push_swap_step.o \
 	push_swap_test_reverse.o \
 	push_swap_test_rotate.o \
-	push_swap_test_swap.o
+	push_swap_test_swap.o \
+	push_swap_how_many.o
 	make fclean -C ft_printf
 
 fclean : clean

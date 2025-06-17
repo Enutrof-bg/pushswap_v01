@@ -95,7 +95,7 @@ int	ft_stack_arg2(char **argv, t_list **stacka)
 	{
 		ft_clear_double_tab(argv);
 		ft_clear(stacka);
-		ft_printf("Errorzizi\n");
+		ft_printf("Error\n");
 		exit(EXIT_FAILURE);
 	}
 	ft_clear_double_tab(argv);

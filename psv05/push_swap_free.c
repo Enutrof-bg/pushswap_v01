@@ -25,6 +25,26 @@ void	ft_clear(t_list **lst)
 	*lst = NULL;
 }
 
+void	ft_clear_2(t_list **lst, t_list **lst2)
+{
+	t_list	*del;
+
+	while (*lst != NULL)
+	{
+		del = *lst;
+		*lst = (*lst)->next;
+		free(del);
+	}
+	*lst = NULL;
+	while (*lst2 != NULL)
+	{
+		del = *lst2;
+		*lst2 = (*lst2)->next;
+		free(del);
+	}
+	*lst2 = NULL;
+}
+
 void	ft_clear_double_tab(char **argv)
 {
 	int	i;

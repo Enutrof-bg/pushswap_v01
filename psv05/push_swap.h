@@ -29,6 +29,16 @@ typedef struct s_list
 	struct s_list	*next;
 }t_list;
 
+typedef struct s_steps
+{
+	long	steps;
+	long	steps_temp;
+	t_list	*temp_a;
+	t_list	*temp_b;
+	int		cible;
+	int		target;
+}t_steps;
+
 //truc
 int		ft_atoi(const char *str);
 int		ft_printf(const char *str, ...);
@@ -50,6 +60,7 @@ int		ft_stack_arg_more(char **argv, t_list **stacka, int argc);
 
 //push_swap_free.c
 void	ft_clear(t_list **lst);
+void	ft_clear_2(t_list **lst, t_list **lst2);
 void	ft_clear_double_tab(char **argv);
 
 //push_swap_ft_check_test.c
@@ -82,6 +93,9 @@ int		ft_get_highest(t_list *lstA);
 int		ft_get_target(t_list *lstA, t_list *lstB);
 int		ft_get_target_2(t_list *lstA, t_list *lstB, int cible);
 int		ft_target(t_list *lstA, t_list *lstB, int cible);
+
+// push_swap_how_many.c
+long	ft_how_many_steps(t_list **lstA, t_list **lstB, int cible, int target);
 
 //push_swap_lstnew.c
 t_list	*ft_lstnew_test(int content);

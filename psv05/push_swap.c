@@ -33,7 +33,6 @@ int	main(int argc, char **argv)
 			return (0);
 		}
 		ft_sort_1(&stacka, &stackb, nbr_value);
-		ft_lstprint_2(stacka, stackb);
 		ft_clear(&stacka);
 		ft_clear(&stackb);
 	}
