@@ -12,6 +12,20 @@
 
 #include "push_swap.h"
 
+int ft_check_argv(char **argv)
+{
+	int i;
+
+	i = 0;
+	while (argv[1][i])
+	{
+		if (argv[1][i] != ' ' && argv[1][i] != '\0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*stacka;
@@ -21,7 +35,11 @@ int	main(int argc, char **argv)
 	stacka = NULL;
 	stackb = NULL;
 	if (argc == 2)
+	{
+		if (ft_check_argv(argv) == 0)
+			return (0);
 		nbr_value = ft_stack_arg2(argv, &stacka);
+	}
 	else if (argc > 2)
 		nbr_value = ft_stack_arg_more(argv, &stacka, argc);
 	if (argc >= 2)
