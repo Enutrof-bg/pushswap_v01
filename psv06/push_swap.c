@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-int ft_check_argv(char **argv)
+int	ft_check_space(char **argv)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (argv[1][i])
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	stackb = NULL;
 	if (argc == 2)
 	{
-		if (ft_check_argv(argv) == 0)
+		if (ft_check_space(argv) == 0)
 			return (0);
 		nbr_value = ft_stack_arg2(argv, &stacka);
 	}
@@ -45,11 +45,7 @@ int	main(int argc, char **argv)
 	if (argc >= 2)
 	{
 		if (ft_if_sorted(stacka, stackb) == 1)
-		{
-			ft_clear(&stacka);
-			ft_clear(&stackb);
-			return (0);
-		}
+			return (ft_clear(&stacka), ft_clear(&stackb), 0);
 		ft_sort_1(&stacka, &stackb, nbr_value);
 		ft_clear(&stacka);
 		ft_clear(&stackb);
