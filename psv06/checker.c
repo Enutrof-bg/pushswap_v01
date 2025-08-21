@@ -12,30 +12,31 @@
 
 #include "push_swap.h"
 
-void	ft_commande(char *str, t_list **stacka, t_list **stackb)
+int	ft_commande(char *str, t_list **stacka, t_list **stackb)
 {
 	if (str[0] == 'p' && str[1] == 'a')
-		ft_push_a_test(stacka, stackb);
-	if (str[0] == 'p' && str[1] == 'b')
-		ft_push_b_test(stacka, stackb);
-	if (str[0] == 's' && str[1] == 'a')
-		ft_swap_a_test(stacka);
-	if (str[0] == 's' && str[1] == 'b')
-		ft_swap_b_test(stackb);
-	if (str[0] == 's' && str[1] == 's')
-		ft_swap_ss_test(stacka, stackb);
-	if (str[0] == 'r' && str[1] == 'a')
-		ft_rotate_a_test(stacka);
-	if (str[0] == 'r' && str[1] == 'b')
-		ft_rotate_b_test(stackb);
-	if (str[0] == 'r' && str[1] == 'r' && str[2] == '\0')
-		ft_rotate_rr_test(stacka, stackb);
-	if (str[0] == 'r' && str[1] == 'r' && str[2] == 'a')
-		ft_reverse_rotate_a_test(stacka);
-	if (str[0] == 'r' && str[1] == 'r' && str[2] == 'b')
-		ft_reverse_rotate_b_test(stackb);
-	if (str[0] == 'r' && str[1] == 'r' && str[2] == 'r')
-		ft_reverse_rotate_rrr_test(stacka, stackb);
+		return (ft_push_a_test(stacka, stackb), 0);
+	else if (str[0] == 'p' && str[1] == 'b')
+		return (ft_push_b_test(stacka, stackb), 0);
+	else if (str[0] == 's' && str[1] == 'a')
+		return (ft_swap_a_test(stacka), 0);
+	else if (str[0] == 's' && str[1] == 'b')
+		return (ft_swap_b_test(stackb), 0);
+	else if (str[0] == 's' && str[1] == 's')
+		return (ft_swap_ss_test(stacka, stackb), 0);
+	else if (str[0] == 'r' && str[1] == 'a')
+		return (ft_rotate_a_test(stacka), 0);
+	else if (str[0] == 'r' && str[1] == 'b')
+		return (ft_rotate_b_test(stackb), 0);
+	else if (str[0] == 'r' && str[1] == 'r' && str[2] == '\0')
+		return (ft_rotate_rr_test(stacka, stackb), 0);
+	else if (str[0] == 'r' && str[1] == 'r' && str[2] == 'a')
+		return (ft_reverse_rotate_a_test(stacka), 0);
+	else if (str[0] == 'r' && str[1] == 'r' && str[2] == 'b')
+		return (ft_reverse_rotate_b_test(stackb), 0);
+	else if (str[0] == 'r' && str[1] == 'r' && str[2] == 'r')
+		return (ft_reverse_rotate_rrr_test(stacka, stackb), 0);
+	return (1);
 }
 
 void	ft_execute(char *str, t_list **stacka, t_list **stackb)
